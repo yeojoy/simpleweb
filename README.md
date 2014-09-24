@@ -1,4 +1,13 @@
 # simple web server with node.js
+## 실행
+```
+$ cd workspace/node/simpleweb
+// package가 없을 경우 실행
+$ npm install
+// 서버 실행
+$ npm start
+```
+
 ## 구조
 \> README.md  
 \> app.js  
@@ -26,4 +35,3 @@ css, javascript, images 등의 정적 파일을 모아두는
 라우팅 관련 함수, 즉 URL에 따라 호출할 함수를 모아두는 디렉토리다. 라우팅에 있는 파일들을 app.js에서 불러와 웹 서버에 라우팅을 연결한다.
 #### views
 view 파일이 위치하는 디렉토리다. java라면 jsp파일이 위치하는 디렉토리와 같고 예제에서는 jade template을 사용하므로 .jade 파일이 위치한다.
-
