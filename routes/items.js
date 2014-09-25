@@ -29,6 +29,9 @@ router.get('/', function(req, res) {
   });
   mysql.end();  
 */
+
+  console.log("REQUEST : \n" + JSON.stringify(req.route) + "\n\n");
+
   db_pool.acquire(function(err, db) {
     if (err) return res.end("CONNECTION error: " + err);
 
@@ -36,6 +39,22 @@ router.get('/', function(req, res) {
       db_pool.release(db);
       if (err) return res.end("QUERY ERROR: " + err);
       
+      res.send(rows);
+    });
+  });
+});
+
+//router.param('id', function (requ, res, next, id) {
+//  next();
+//});
+
+router.get('/:id', function(req, res) {
+  var id = req.params.id;
+  console.log(" >>> ID : " + id + " <<< ");
+  db_pool.acquire(function(err, db) {
+    db.query("SELECT * FROM items WHERE id = ?", [id], function(err, rows, columns) {
+      db_pool.release(db);
+      if (err) return res.end(err);
       res.send(rows);
     });
   });
