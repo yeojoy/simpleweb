@@ -39,7 +39,7 @@ router.get('/', function(req, res) {
       db_pool.release(db);
       if (err) return res.end("QUERY ERROR: " + err);
       
-      res.send(rows);
+      res.json(rows);
     });
   });
 });
@@ -50,14 +50,31 @@ router.get('/', function(req, res) {
 
 router.get('/:id', function(req, res) {
   var id = req.params.id;
+  console.log(" >>>>>>>>>>>>>>>>>>>>>>>>>>>>\n" + JSON.stringify(req.params) + "\n<<<<<<<<<<<<<<<<<<<<<<<<");
   console.log(" >>> ID : " + id + " <<< ");
   db_pool.acquire(function(err, db) {
     db.query("SELECT * FROM items WHERE id = ?", [id], function(err, rows, columns) {
       db_pool.release(db);
       if (err) return res.end(err);
-      res.send(rows);
+      res.json(rows);
     });
   });
 });
+
+
+router.get('/:id/num/:num', function(req, res) {
+  var id = req.params.id;
+  var num = req.params.num;
+  console.log(" >>>>>>>>>>>>>>>>>>>>>>>>>>>>\n" + JSON.stringify(req.params) + "\n<<<<<<<<<<<<<<<<<<<<<<<<");
+  console.log(" >>> ID : " + id + " <<< ");
+  db_pool.acquire(function(err, db) {
+    db.query("SELECT * FROM items WHERE id = ? and num = ?", [id, num], function(err, rows, columns) {
+      db_pool.release(db);
+      if (err) return res.end(err);
+      res.json(rows);
+    });
+  });
+});
+
 
 module.exports = router;
