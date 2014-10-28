@@ -58,5 +58,13 @@ router.get('/:id/num/:num', function(req, res) {
   });
 });
 
+/*
+mysql insert
+var post  = {id: 1, title: 'Hello MySQL'};
+var query = connection.query('INSERT INTO posts SET ?', post, function(err, result) {
+  // Neat!
+});
+console.log(query.sql); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
+*/
 
 module.exports = router;
